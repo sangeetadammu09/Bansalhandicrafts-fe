@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row">
+        <app-page-title [pagetitle]="title" [breadcrumbLabel]="breadcrumb"></app-page-title>
+    </div>
+    <div class="row pt-3">
+        <div class="col-lg-8">
+          <h4>List of Enquiry</h4>
+        </div>
+        <div class="col-lg-4">
+          <div class="input-group">
+            <input  class="form-control border-secondary border-right-0 rounded-0" type="search" [(ngModel)]="filterText"
+            placeholder="Search By Phone Number" (change)="searchTeacher(filterText)">
+          </div>
+        </div>
+        
+      </div>
+      <div class="table-responsive  py-3" *ngIf="enquiryList.length > 0">
+        <table class="table table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" *ngFor="let item of tableColumns">{{item}}</th>  
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of enquiryList| paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems } ; let i = index">
+            <tr>
+              <td  scope="col">{{itemsPerPage*(currentPage-1)+i+1}}</td>
+              <td  scope="col">{{item.creation_dt | date:'dd/MM/yyyy'}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.contact}}</td>
+              <td>{{item.subject}}</td>
+              <td data-toggle="tooltip" data-placement="top" [title]="item.message">{{item.message | slice: 1 : 25}}</td>                 
+              <td data-bs-toggle="modal" data-bs-target="#deleteContact" (click)="deleteContact(item)">
+                <img src="../../../../assets/images/icons/delete_icon.png" alt="Delete Admin">
+              </td>          
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row w-100 p-2"  *ngIf="enquiryList.length > 0">
+        <div class="col-6">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <label class="control-label" for="noOfRows">No. of Entries</label>
+            </div>
+            <div class="col-auto">
+              <select name="noOfRows" (change)="onTableSizeChange($event)" class="form-select form-select-sm">
+                <option *ngFor="let size of tableSize" [ngValue]="size">
+                  {{ size }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 d-flex justify-content-end">
+          <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+            (pageChange)="handlePageChange($event)"></pagination-controls>
+        </div>
+      </div>
+      <div class="col-12 mb-3" *ngIf="enquiryList.length == 0">
+        <!-- <p class="text-center">No Teacher Found</p> -->
+        <app-not-found></app-not-found>
+      </div> 
+</div>
+
+<!-- delete admin -->
+<div class="modal fade" id="deleteContact" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this enquiry?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="confirmDelete()">Yes</button>
+
+  </div>
+  </div>
+</div>
+</div>
+

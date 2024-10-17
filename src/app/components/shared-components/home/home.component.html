@@ -1,0 +1,89 @@
+<div class="wrapper">
+  <div class="row">
+    <owl-carousel-o [options]="customCOptions">
+      <ng-container *ngFor="let item of slides">
+        <ng-template carouselSlide [id]="item.id">        
+            <img [src]="item.image"> 
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</div>
+<div class="container-fluid">
+    <div class="row row-offer"> 
+      <div class="col-md">
+        <h1>Welcome To Bansal Handicrafts</h1>
+        <p>We are the manufacturer of Agate & Semiprecious Stone Slabs and its Articles based in Delhi, India. 
+          We can make slabs for many products like dining table, coffee table, side table, kitchen counter, bathroom counter, 
+          wall panel and many more. 
+          We have huge range of stones like agate, quartz, amethyst, petrified wood etc</p>
+          <p>Call Us Today:</p>
+            <ul style="list-style: none;">
+              <li> Devendar Bansal : <b>+91-9810190287</b></li>
+              <li> Aman Bansal : <b>+91-8700806736</b></li>
+              <li>Office no : <b>+91-9643790287</b></li>
+            </ul> 
+      </div>
+      <div class="col-md ">     
+          <img src="/assets/img/welcome.jpeg" alt="Welcome To Bansal Handicrafts">
+      </div>
+  
+    </div>
+</div>
+   
+<!-- Newest Products-->
+ <div class="container-fluid">
+  <div class="row">
+    <h3>Newest Products</h3>
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let item of newestProductList">
+        <ng-template carouselSlide [id]="item._id">
+          <div  class="px-2 mx-2">
+            <img [src]="item.storageurlArr[0].imageurl">
+          <h5 class="text-center">{{item.title}}</h5>
+          </div>      
+        </ng-template>
+      </ng-container>
+
+    </owl-carousel-o>
+</div>
+ </div>
+
+ <!-- Best Selling Products-->
+ <div class="container-fluid">
+  <div class="row">
+    <h3>Best Selling Products</h3>
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let item of bestSellingProductList">
+        <ng-template carouselSlide [id]="item._id">
+          <div  class="px-2 mx-2">
+            <img [src]="item.storageurlArr[0].imageurl">
+          <h5 class="text-center">{{item.title}}</h5>
+          </div>      
+        </ng-template>
+      </ng-container>
+
+    </owl-carousel-o>
+</div>
+ </div>
+
+
+  <!-- Featured Products-->
+  <div class="container-fluid">
+    <div class="row">
+      <h3>Featured Products</h3>
+      <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let item of featuredProductList">
+          <ng-template carouselSlide [id]="item._id">
+            <div  class="px-2 mx-2">
+              <img [src]="item.storageurlArr[0].imageurl">
+            <h5 class="text-center">{{item.title}}</h5>
+            </div>      
+          </ng-template>
+        </ng-container>
+  
+      </owl-carousel-o>
+  </div>
+   </div>
+  
+

@@ -1,0 +1,18 @@
+export const ShopSubmenu = [
+    { id:0, label: 'Agate Pendant'},
+    { id:1, label: 'Angel'},
+    { id:2, label: 'Arrow Head'},
+    { id:3, label: 'Bath Set'},
+    { id:4, label: 'Braclet'},
+    { id:5, label: 'Clocks'},
+    { id:6, label: 'Pyramids'},
+    { id:7, label: 'Photo Frames'},
+    { id:8, label: 'Rough Stone'},
+    { id:9, label: 'Rough Showpiece'},
+    { id:10, label: 'Stone Ball'},
+    { id:11, label: 'Stone Wands'},
+    { id:12, label: 'Stone Chips'},
+    { id:13, label: 'Stone Tumbles'},
+    { id:14, label: 'Stone Knob'},
+    { id:15, label: 'Tea Light Holder'},
+]

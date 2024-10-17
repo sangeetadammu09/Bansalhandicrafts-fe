@@ -1,0 +1,106 @@
+<form class="row" [formGroup]="productForm" (ngSubmit)="submit()">
+    <div class="col-md-6 mb-3">
+        <label for="name">Title<span style="color:red;">*</span></label>
+        <input type="text" class="form-control" formControlName="title" [ngClass]="{'is-invalid':
+        (submitted && p['title'].errors) ||(p['title'].errors && p['title'].touched)}" />
+        <div *ngIf="(submitted && p['title'].errors) ||(p['title'].errors && p['title'].touched)"
+            class="invalid-feedback">
+            <div *ngIf="p['title'].errors['required']">Title is required</div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="email">SKU<span style="color:red;">*</span></label>
+        <input type="text" class="form-control" formControlName="sku" [ngClass]="{'is-invalid':
+          (submitted && p['sku'].errors) ||(p['sku'].errors && p['sku'].touched)}" />
+        <div *ngIf="(submitted && p['sku'].errors) ||(p['sku'].errors && p['sku'].touched)" class="invalid-feedback">
+            <div *ngIf="p['sku'].errors['required']">SKU is required</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="location">Category<span style="color:red;">*</span></label>
+        <select class="form-control form-select" formControlName="category"
+            (change)="fetchCityList(p['category'].value)"
+            [ngClass]="{'is-invalid':(submitted && p['category'].errors) ||(p['category'].errors && p['category'].touched)}">
+            <option value="" selected>Select</option>
+            <option *ngFor="let item of categoryList" [value]="item.label">{{item.label}}</option>
+        </select>
+        <div *ngIf="(submitted && p['category'].errors) ||(p['category'].errors && p['category'].touched)"
+            class="invalid-feedback">
+            <div *ngIf="p['category'].errors['required']">Category is required</div>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 mb-3">
+        <label for="location">Sub Category<span style="color:red;">*</span></label>
+        <input type="text" class="form-control " formControlName="subCategory"
+            [ngClass]="{'is-invalid':(submitted && p['subCategory'].errors) ||(p['subCategory'].errors && p['subCategory'].touched)}" />
+        <!-- <select *ngIf="!disableSelectsubCategoryField"  class="form-control form-select" formControlName="subCategory"
+         [ngClass]="{'is-invalid':(submitted && p['subCategory'].errors) ||(p['subCategory'].errors && p['subCategory'].touched)}">
+            <option value="" selected>Select</option>
+            <option *ngFor="let item of subCategoryList" [value]="item.name">{{item.name}}</option>
+        </select> -->
+        <div *ngIf="(submitted && p['subCategory'].errors) ||(p['subCategory'].errors && p['subCategory'].touched)"
+            class="invalid-feedback">
+            <div *ngIf="p['subCategory'].errors['required']">Sub Category is required</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="location">Display Type<span style="color:red;">*</span></label>
+        <select class="form-control form-select" id="exampleFormControlSelect1" formControlName="displayType"
+            [ngClass]="{'is-invalid':(submitted && p['displayType'].errors) ||(p['displayType'].errors && p['displayType'].touched)}">
+            <option value="" selected disabled>Select</option>
+            <option value="1">Price</option>
+            <option value="2">Url</option>
+        </select>
+        <div *ngIf="(submitted && p['displayType'].errors) ||(p['displayType'].errors && p['displayType'].touched)"
+            class="invalid-feedback">
+            <div *ngIf="p['displayType'].errors['required']">Display Type is required</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="location">Price<span style="color:red;">*</span></label>
+        <input type="text" class="form-control" formControlName="price" [ngClass]="{'is-invalid':
+        (submitted && p['price'].errors) ||(p['price'].errors && p['price'].touched)}" />
+        <div *ngIf="(submitted && p['price'].errors) ||(p['price'].errors && p['price'].touched)"
+            class="invalid-feedback">
+            <div *ngIf="p['price'].errors['required']">Price is required</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="location">Url<span style="color:red;">*</span></label>
+        <input type="text" class="form-control" formControlName="url" [ngClass]="{'is-invalid':
+        (submitted && p['url'].errors) ||(p['url'].errors && p['url'].touched)}" />
+        <div *ngIf="(submitted && p['url'].errors) ||(p['url'].errors && p['url'].touched)" class="invalid-feedback">
+            <div *ngIf="p['url'].errors['required']">Url is required</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="location">Description</label>
+        <textarea type="text-area" class="form-control" rows="5" id="description" formControlName="description">
+        </textarea>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label for="upload">Upload Image</label>
+        <input class="form-control" type="file" id="formFile" formControlName="imageurl" (change)="onFileSelect($event)"
+            name="document" multiple>
+    </div>
+    <!-- <div class="col-md-6 mb-3" *ngIf="imageUrl != ''">
+        <label for="upload">Reupload Reference</label>
+        <div class="col-lg-12 mb-3">
+          <a class="image-hyperlink">{{imageUrl}} 
+            <span (click)="reuploadImage()"><img src="../../../../assets/images/icons/reset_icon.png" alt="Reupload"> </span></a>
+      </div>
+      </div> -->
+
+    <div class="modal-footer mb-3">
+        <button type="submit" class="btn btn-primary">{{submitBtnText}}</button>
+    </div>
+
+</form>

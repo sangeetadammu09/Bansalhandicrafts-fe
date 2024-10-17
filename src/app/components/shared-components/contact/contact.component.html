@@ -1,0 +1,99 @@
+<div class="container">
+	<div class="row mt-3">
+		<div class="col-md-4" *ngFor="let x of addressData">
+			<div class="card px-5">
+				<p style="display: block; margin: auto; padding: 20px;">
+					<img src="/assets/img/location.png" alt="Address of Bansalhandicrafts">
+				</p>
+				<p><b>{{x.label}}</b></p>
+				<p>{{x.sublabel}}</p>
+			</div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-4 mt-5">
+			<h6><b> Contact us:</b></h6>
+			<p><b>Devendar Bansal (Office):</b>+91 9810190287</p>
+			<p><b>Aman Bansal:</b>+91 8700806736</p>
+			<p><b>Email at:</b> devendarbansal@gmail.com, bansalhandicrafts11@gmail.com</p>
+			<small> <b><i>We provide 24/7 assistance</i></b></small>
+
+		</div>
+		<div class="col-md-8">
+			<h4>We 'd love to hear from you.</h4>
+			<p>Send us a message and we ‘ll respond as soon as possible!!</p>
+			<form [formGroup]="contactForm" (ngSubmit)="onContactSubmit()">
+				<div class="container">
+					<div class="form-group mb-1">
+						<label class="form-label" for="fname">Name<span style="color:red;">*</span></label>
+						<div class="col-md-12">
+							<input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{'is-invalid': (submitted && f['name'].errors)
+				  ||(f['name'].errors && f['name'].touched)}" />
+							<div *ngIf="(submitted && f['name'].errors) ||(f['name'].errors && f['name'].touched)"
+								class="invalid-feedback">
+								<div *ngIf="f['name'].errors['required']">Name is required</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group mb-1">
+						<label class="form-label" for="email">Email<span style="color:red;">*</span></label>
+						<div class="col-md-12">
+							<input type="email" class="form-control" id="email" formControlName="email"
+								[ngClass]="{'is-invalid': (submitted && f['email'].errors) ||(f['email'].errors && f['email'].touched)}">
+							<div *ngIf="(submitted && f['email'].errors) ||(f['email'].errors && f['email'].touched)"
+								class="invalid-feedback">
+								<div *ngIf="f['email'].errors['required']">Email is required</div>
+								<div *ngIf="f['email'].errors['email']">Email is not valid</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group mb-1">
+						<label class="form-label" for="lname">Phone Number<span
+								style="color:red;">*</span></label>
+						<div class="col-md-12">
+							<input type="text" class="form-control" id="phone" formControlName="phone"
+								[ngClass]="{'is-invalid': (submitted && f['phone'].errors) ||(f['phone'].errors && f['phone'].touched)}">
+							<div *ngIf="(submitted && f['phone'].errors) ||(f['phone'].errors && f['phone'].touched)"
+								class="invalid-feedback">
+								<div *ngIf="f['phone'].errors['required']">Contact is required</div>
+								<div *ngIf="f['phone'].errors['pattern']">Only Number are allowed</div>
+								<div *ngIf="f['phone'].errors['maxlength']">Only 10 digits are allowed</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="form-group mb-1">
+						<label class="form-label" for="subject">Subject<span
+								style="color:red;">*</span></label>
+						<div class="col-md-12">
+							<input type="text" class="form-control" id="subject" formControlName="subject"
+								[ngClass]="{'is-invalid': (submitted && f['subject'].errors) ||(f['subject'].errors && f['subject'].touched)}" />
+							<div *ngIf="(submitted && f['subject'].errors) ||(f['subject'].errors && f['subject'].touched)"
+								class="invalid-feedback">
+								<div *ngIf="f['subject'].errors['required']">Subject is required</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group mb-1">
+						<label class="form-label" for="message">Message<span
+								style="color:red;">*</span></label>
+						<div class="col-md-12">
+							<textarea class="form-control" rows="5" id="message" formControlName="message"
+								[ngClass]="{'is-invalid': (submitted && f['message'].errors) ||(f['message'].errors && f['message'].touched)}"></textarea>
+							<div *ngIf="(submitted && f['message'].errors) ||(f['message'].errors && f['message'].touched)"
+								class="invalid-feedback">
+								<div *ngIf="f['message'].errors['required']">Message is required</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group mb-1">
+						<div class="col-sm-offset-2 col-md-12 mt-3">
+							<button type="submit" class="btn btn-default button">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
