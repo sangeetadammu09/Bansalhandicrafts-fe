@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 
 
 export const APP_DI_CONFIG: any = {
-  // For api calls
-  parentDomain: 'http://localhost:8080/',
+  // For api calls - http://localhost:8080/
+  parentDomain: 'http://52.66.255.78:8080/',
   endPoints: {
     Admin:{
       login : "admin/login",
@@ -35,8 +35,7 @@ export const APP_DI_CONFIG: any = {
       checkphoneemail : "product/check/",
       productupdate : "product/update/",
       productdelete : "product/delete/"
-    },
-    
+    },   
     Mail:{
         contact : "mail/contact",
         product : "mail/product",
