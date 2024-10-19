@@ -1,9 +1,9 @@
-# build the anguular app
+# build the angular app
 FROM node:20-alpine as build
 
 WORKDIR /app
 COPY package*.json .
-RUN npm ci
+RUN npm install
 COPY . .
 RUN npm run build
 

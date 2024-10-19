@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 
 
 export const APP_DI_CONFIG: any = {
-  // For api calls -  'http://13.202.237.226:8080/
-  parentDomain: 'http://localhost:8080/',
+  // For api calls -  ',http://localhost:8080/
+  parentDomain: 'http://13.202.237.226:8080/',
   endPoints: {
     Admin:{
       login : "admin/login",
