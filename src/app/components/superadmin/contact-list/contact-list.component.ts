@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ErrorhandlerService } from '../../../../app/shared/services/errorhandler.service';
 import { PagerService } from '../../../../app/shared/services/pager.service';
 import { ContactService } from '../../../../app/shared/services/contact.service';
+import { Pagination } from '../../../shared/utils/pagination';
 
 @Component({
   selector: 'app-contact-list',
@@ -37,13 +38,11 @@ export class ContactListComponent{
   togglePasswordIcon: boolean = false;
   @ViewChild('inputpassword') inputpassword!:ElementRef;
    @ViewChild('closeAddAdminModal') closeAddAdminModal!:ElementRef;
-  
+   pagination = Pagination;
+   filterPayload :any;
 
-
-  constructor(private fb : FormBuilder,private router : Router, private errHandler : ErrorhandlerService,private filterService : PagerService,
-              private toastrService : ToastrService,private _fb: FormBuilder, private cService: ContactService){ 
-                
-              }
+   constructor(private fb : FormBuilder,private router : Router, private errHandler : ErrorhandlerService,private filterService : PagerService,
+              private toastrService : ToastrService,private _fb: FormBuilder, private cService: ContactService){}
 
 
   ngOnInit(): void {
@@ -57,11 +56,9 @@ export class ContactListComponent{
   }
 
   getEnquiryList(){
-    this.payload.startNumber = 1;
-    this.payload.pageSize = 10;
-    let role = 'subadmin';
-    //let filter = this.filterService.GetFilterConditionPagination('role', 'subadmin',this.payload.pageSize, this.payload.startNumber )
-    this.cService.getAll(null).subscribe({next: (data:any)=>{
+    let filterCondition:any = {};
+    this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber)
+    this.cService.getAll(this.filterPayload).subscribe({next: (data:any)=>{
       if(data.status == 200){
        // console.log(data.data)
         this.enquiryList = data.data;
@@ -81,10 +78,9 @@ export class ContactListComponent{
   }
 
   handlePageChange(event: number){
-    // console.log(event)
-    //  this.currentPage = event;
-    //  this.filterPayload.pageNumber = event;
-    //  this.getTeachersList();
+    this.currentPage = event;
+    this.pagination.startNumber = event
+    this.getEnquiryList();
    
      
   }
@@ -105,11 +101,36 @@ export class ContactListComponent{
   //  })
  }
  
-  searchTeacher(text:any){
+ searchContact(text:any){
+  this.pagination.startNumber = 1;
+  let filterCondition:any = {};
+  filterCondition.contact = text;
+  this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber);
+  this.cService.search(this.filterPayload).subscribe({next: (data: any) => {
+      if (data.status == 200) {
+        let result = data.data;
+        this.enquiryList = result;
+        this.totalItems = data.total; 
+      }
 
+    }, error: ((err: any) => {
+      let error = this.errHandler.handleError(err);
+      ////console.log(error)
+      if (error.status == 401) {
+        this.toastrService.error('Token Expired');
+      }
+      if (error.status == 400) {
+        this.toastrService.error('Please enter valid input');
+      }
+      if (error.status == 500) {
+        this.toastrService.error('Server Error.Failed to fetch teachers list');
+      }
+
+    })
+  })
   }
 
-  deleteAdmin(item){
+  deleteContact(item){
     this.adminData = item;
 
   }

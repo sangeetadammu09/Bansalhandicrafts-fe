@@ -42,9 +42,6 @@
     "ngx-toastr": "^18.0.0",
     "owl.carousel": "^2.3.4",
     "popper.js": "^1.16.1",
-    "primeicons": "^7.0.0",
-    "primeng": "^15.4.1",
-    "quill": "^2.0.2",
     "rxjs": "7.8.1",
     "tslib": "2.5.0",
     "zone.js": "~0.13.0"

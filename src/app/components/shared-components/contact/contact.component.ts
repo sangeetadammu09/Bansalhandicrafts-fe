@@ -52,10 +52,11 @@ export class ContactComponent implements OnInit {
       this.contactService.create(contactObject).subscribe({next: (data:any)=>{
         if(data.status == 200){
           this.toastrService.success('Thankyou! Your query has been successfully. Our Team will get to you soon!');
-        this.authService.contactEmail(contactObject).subscribe((data:any) => {
-         // console.log(data, 'email')
-         this.router.navigate(['/'])
-        });
+          this.router.navigate(['/'])
+        // this.authService.contactEmail(contactObject).subscribe((data:any) => {
+        //  // console.log(data, 'email')
+       
+        // });
         }
         
       },error:((err:any) =>{

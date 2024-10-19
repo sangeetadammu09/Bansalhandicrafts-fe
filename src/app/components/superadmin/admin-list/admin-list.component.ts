@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ErrorhandlerService } from '../../../../app/shared/services/errorhandler.service';
 import { AdminService } from '../../../../app/shared/services/admin.service';
 import { PagerService } from '../../../../app/shared/services/pager.service';
+import { Pagination } from '../../../shared/utils/pagination';
 
 
 @Component({
@@ -38,25 +39,26 @@ export class AdminListComponent {
   togglePasswordIcon: boolean = false;
   @ViewChild('inputpassword') inputpassword!:ElementRef;
    @ViewChild('closeAddAdminModal') closeAddAdminModal!:ElementRef;
-  
+   pagination = Pagination;
+   filterPayload :any;
 
 
   constructor(private fb : FormBuilder,private router : Router, private errHandler : ErrorhandlerService,private filterService : PagerService,
               private toastrService : ToastrService,private _fb: FormBuilder, private adminService: AdminService){ 
                 this.registerForm = this._fb.group({
-                  firstname : ['', Validators.required],
-                  lastname : ['', Validators.required],
-                  email : ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
-                  mobile : ['', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+                  firstname : ['Sangeeta', Validators.required],
+                  lastname : ['Dammu', Validators.required],
+                  email : ['sangeetadammu12@gmail.com', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
+                  mobile : ['8332895856', [Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
                   role : ['subadmin'],
-                  location: ['', Validators.required],
+                  location: ['Bangalore', Validators.required],
                   sociallinks:  ['empty'],
-                  password : ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
-                  cpass : ['', Validators.required],    
+                  password : ['Sangeeta@123', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]],
+                  cpass : ['Sangeeta@123', Validators.required],    
                   isActive : [true],
                   islocationassigned : [false],
-                  locationassignednames : ['']
-                  //imageurl: [],
+                  locationassignednames : ['Bangalore'],
+                 // url: ['empty'],
                })
               }
 
@@ -72,14 +74,14 @@ export class AdminListComponent {
   }
 
   getSubAdminList(){
-    this.payload.startNumber = 1;
-    this.payload.pageSize = 10;
-    let role = 'subadmin';
-    let filter = this.filterService.GetFilterConditionPagination('role', 'subadmin',this.payload.pageSize, this.payload.startNumber )
-    this.adminService.getAllAdmins(filter).subscribe({next: (data:any)=>{
+    let filterCondition:any = {};
+    filterCondition.role = 'subadmin';
+    this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber)
+    this.adminService.getAllAdmins(this.filterPayload).subscribe({next: (data:any)=>{
       if(data.status == 200){
        // console.log(data.data)
         this.subAdminList = data.data;
+        this.totalItems = data.total;
       }
       
     },error:((err:any) =>{
@@ -96,10 +98,10 @@ export class AdminListComponent {
   }
 
   handlePageChange(event: number){
-    // console.log(event)
-    //  this.currentPage = event;
-    //  this.filterPayload.pageNumber = event;
-    //  this.getTeachersList();
+   // console.log(event)
+     this.currentPage = event;
+     this.pagination.startNumber = event
+     this.getSubAdminList();
    
      
   }
@@ -120,8 +122,35 @@ export class AdminListComponent {
   //  })
  }
  
-  searchTeacher(text:any){
+ searchAdmin(text:any){
+  this.pagination.startNumber = 1;
+  let filterCondition:any = {};
+  filterCondition.mobile = text;
+  filterCondition.role = 'subadmin';
+  this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber);
+  this.adminService.getAllAdmins(this.filterPayload).subscribe({next: (data: any) => {
+      if (data.status == 200) {
+        let result = data.data;
+        this.subAdminList = result;
+        this.totalItems = data.total;
+    
+      }
 
+    }, error: ((err: any) => {
+      let error = this.errHandler.handleError(err);
+      ////console.log(error)
+      if (error.status == 401) {
+        this.toastrService.error('Token Expired');
+      }
+      if (error.status == 400) {
+        this.toastrService.error('Please enter valid input');
+      }
+      if (error.status == 500) {
+        this.toastrService.error('Server Error.Failed to fetch teachers list');
+      }
+
+    })
+  })
   }
 
    
@@ -137,13 +166,14 @@ export class AdminListComponent {
 
   openSubAdminModal(){
     this.subAdminLabel = 'Add Sub Admin';
-    this.registerForm.reset();
+   // this.registerForm.reset();
     this.registerForm.patchValue({
       role : 'subadmin',
       islocationassigned : false,
-      isActive : true,
+      isActive : 'true',
       sociallinks : 'empty',
-      locationassignednames : ''
+      locationassignednames : '',
+     // url: 'empty'
 
     })
    
@@ -162,11 +192,11 @@ export class AdminListComponent {
           mobile : item.mobile,
           role : item.role,
           location: item.location,
-          isActive : item.isActive,
+          isActive : item.isActive.toString(),
           password: item.password,
           cpass : item.cpass,
           islocationassigned : item.islocationassigned,
-          locationassignednames : item.locationassignednames
+          locationassignednames : item.locationassignednames,
         })
   }
 
@@ -176,6 +206,7 @@ export class AdminListComponent {
         let payload = this.registerForm.value;
        
         let formData = new FormData();
+        
         Object.entries(payload).forEach(([key, value]) => {
           formData.append(key, (value).toString());
         });

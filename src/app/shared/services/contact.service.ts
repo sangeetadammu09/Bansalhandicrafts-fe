@@ -26,6 +26,11 @@ export class ContactService {
     return this._http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Contact.list,data)
   }
 
+  search(data: any){
+    return this._http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Contact.search,data)
+  }
+
+
    //Helper Methods
 
    setToken(token: string) {

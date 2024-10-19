@@ -9,3 +9,10 @@ export const Pagination = {
     // 'sortProperty': 'id',
     // 'sortOrder' : 1,
 };
+
+
+export const FilterPagination = {
+    'startNumber' : 1,
+    'pageSize' : 10,
+    'filterCondition' : {}
+};

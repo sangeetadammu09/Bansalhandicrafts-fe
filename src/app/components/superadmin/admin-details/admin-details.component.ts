@@ -88,7 +88,7 @@ export class AdminDetailsComponent {
         role: this.adminData.role,
         password: this.adminData.password,
         cpass: this.adminData.cpass,
-        imageurl: this.adminData.imageurl,
+      //  imageurl: this.adminData.storageurlArr[0].imageurl,
         isActive: this.adminData.isActive
       
       })
@@ -98,7 +98,7 @@ export class AdminDetailsComponent {
        this.populateData();
       }
 
-      this.selectedFileName = this.adminData.imageurl == undefined ? '' : this.adminData.imageurl.substring(this.adminData.imageurl.indexOf('uploads/') + 1);
+      this.selectedFileName = this.adminData.storageurlArr.length>0 ? '' : this.adminData.storageurlArr[0].imageurl.substring(this.adminData.storageurlArr[0].imageurl.indexOf('uploads/') + 1);
       
       }      
     },error:((err:any) =>{

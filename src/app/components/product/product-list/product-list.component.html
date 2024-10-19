@@ -7,9 +7,12 @@
       <h4>List of Products</h4>
     </div>
     <div class="col-lg-4">
-      <div class="input-group">
-        <input class="form-control border-secondary border-right-0 rounded-0" type="search" [(ngModel)]="filterText"
-          placeholder="Search By Product Type" (change)="searchProduct(filterText)">
+      <div class="form-group">
+        <select class="form-select" (change)="searchProduct($event)">        
+              <option selected>Search with category</option>
+              <option value="">Select All</option>
+              <option *ngFor="let item of categoryList" [value]="item.id">{{item.label}}</option>
+        </select>
       </div>
     </div>
     <div class="col-lg-2">
@@ -40,7 +43,7 @@
           <td>{{item.price}}</td>
           <td>{{item.url}}</td>
           <td (click)="action(item,'view')" data-bs-toggle="modal" data-bs-target="#ProductModal">
-            <img src="../../../../assets/images/icons/view_icon.png" alt="View Product Image">
+            <img src="../../../../assets/images/icons/photo_icon.png" alt="View Product Image">
           </td>
           <td (click)="action(item,'edit')" data-bs-toggle="modal" data-bs-target="#ProductModal">
             <img src="../../../../assets/images/icons/edit_icon.png" alt="Edit Product">

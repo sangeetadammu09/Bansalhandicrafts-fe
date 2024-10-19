@@ -58,22 +58,19 @@ export class PagerService {
     };
   }
 
-  public GetFilterConditionPagination(key:any ,value:any,pageSize:number,startNumber:number){
-    return this.CreateFilterCondition(key,value,pageSize,startNumber);
+  public GetFilterConditionPagination(filterCondition:any,pageSize:number,startNumber:number){
+    return this.CreateFilterCondition(filterCondition,pageSize,startNumber);
   }
 
-  private CreateFilterCondition(key:any, value:any,pageSize: number ,startNumber:number){
+  private CreateFilterCondition(filterCondition:any,pageSize: number ,startNumber:number){
     var filterCond = new FilterCondition();
-    let filter:any = {};
-    filter[key] = value;
-    filterCond.filterCondition = filter;
+    filterCond.filterCondition = filterCondition;
     filterCond.pageSize = pageSize;
     filterCond.startNumber = startNumber;
   
     return filterCond;
   }
-  
- 
+
 }
 
 export class FilterCondition {

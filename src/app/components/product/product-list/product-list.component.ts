@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorhandlerService } from '../../../../app/shared/services/errorhandler.service';
 import { Pagination } from '../../../../app/shared/utils/pagination';
-import { MasterService } from '../../../../app/shared/services/master.service';
 import { ProductService } from '../../../shared/services/product.service';
 import { ShopSubmenu } from '../../../shared/model/shopSubmenu';
 import { FeatureList } from '../../../shared/model/featureList';
-
+import { PagerService } from '../../../shared/services/pager.service';
 
 @Component({
   selector: 'app-product-list',
@@ -21,7 +20,6 @@ export class ProductListComponent {
   breadcrumb = ['Dashboard', 'Admin', 'Product List'];
   startNumber = 1;
   pageSize = 10;
-  pagination = Pagination;
   productList: any[] = [];
   filterText = '';
   currentPage: number = 1;
@@ -48,12 +46,14 @@ export class ProductListComponent {
   @Input() formData: any;
   productId: any = '0';
   prodctImages :any[] = [];
+  pagination = Pagination;
+   filterPayload :any;
   @ViewChild('closeProductModal') closeProductModal!:ElementRef;
   // convenience getter for easy access to form fields
   get p() { return this.productForm.controls; };
 
   constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,
-    private errHandler: ErrorhandlerService, private toastrService: ToastrService, private masterService: MasterService) {
+    private errHandler: ErrorhandlerService, private toastrService: ToastrService, private filterService : PagerService) {
     this.productForm = this.fb.group({
      // _id: [''],
       title: ['', Validators.required],
@@ -80,21 +80,20 @@ export class ProductListComponent {
   }
 
   getProducts() {
-    let payload: any = {};
-    payload.pagination = this.pagination;
-    this.productService.listOfProducts(payload).subscribe({
-      next: (data: any) => {
+    let filterCondition:any = {};
+    this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber)
+    this.productService.listOfProducts(this.filterPayload).subscribe({next: (data: any) => {
         if (data.status == 200) {
-          let tuitions = data.data
+          let result = data.data
           //.map((item: any) => ({ ...item, modeofteaching: JSON.parse(item.modeofteaching) }))
-          this.productList = tuitions;
-          console.log(this.productList)
-          //  this.toastrService.success('Tutions list are fetched successfully')
+          this.productList = result;
+          this.totalItems = data.total;
+      
         }
 
       }, error: ((err: any) => {
         let error = this.errHandler.handleError(err);
-        //console.log(error)
+        ////console.log(error)
         if (error.status == 401) {
           this.toastrService.error('Token Expired');
         }
@@ -111,9 +110,9 @@ export class ProductListComponent {
 
   handlePageChange(event: number) {
     // console.log(event)
-    //  this.currentPage = event;
-    //  this.filterPayload.pageNumber = event;
-    //  this.getTeachersList();
+     this.currentPage = event;
+     this.pagination.startNumber = event;
+     this.getProducts();
 
 
   }
@@ -131,11 +130,39 @@ export class ProductListComponent {
     //         this.managerList = [];
     //       }   
     //  },(err:HttpErrorResponse) => {
-    //      console.log(err)
+    //      //console.log(err)
     //  })
   }
 
-  searchProduct(text: any) {
+  searchProduct(event: any) {
+  this.pagination.startNumber = 1;
+  let filterCondition:any = {};
+  filterCondition.categoryId = this.filterText;
+  this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber);
+  this.productService.search(this.filterPayload).subscribe({next: (data: any) => {
+        if (data.status == 200) {
+          let result = data.data
+          //.map((item: any) => ({ ...item, modeofteaching: JSON.parse(item.modeofteaching) }))
+          this.productList = result;
+          this.totalItems = data.total;
+      
+        }
+
+      }, error: ((err: any) => {
+        let error = this.errHandler.handleError(err);
+        ////console.log(error)
+        if (error.status == 401) {
+          this.toastrService.error('Token Expired');
+        }
+        if (error.status == 400) {
+          this.toastrService.error('Please enter valid input');
+        }
+        if (error.status == 500) {
+          this.toastrService.error('Server Error.Failed to fetch teachers list');
+        }
+
+      })
+    })
   }
 
   openProductModal(){
@@ -154,7 +181,7 @@ export class ProductListComponent {
   fetchCityList(value: any) {
     let cityList = this.categoryList.filter((x: any) => x.name == value);
     // this.cityList = cityList[0].cities
-    // // console.log('City', this.cityList)
+    // // //console.log('City', this.cityList)
     //  if(cityList[0].union == true){
     //   this.disableSelectCityField = true;
     //   this.productForm.controls['city'].setValue('')
@@ -170,14 +197,14 @@ export class ProductListComponent {
 
   onFileSelect(event: any) {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files)
+      //console.log(event.target.files)
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
         this.selectedFile = event.target.files
-        console.log(this.selectedFile)
+        //console.log(this.selectedFile)
         var reader = new FileReader();
         // reader.onload = (event: any) => {
-        //   console.log(event.target.result);
+        //   //console.log(event.target.result);
         //   this.urlsp.push(event.target.result);
         // }
       }
@@ -198,18 +225,16 @@ export class ProductListComponent {
   getCategoryId(id:any){
    let [catName] = this.categoryList.filter((x:any) => x.id == id)
    this.productForm.controls['category'].setValue(catName.label);
-   console.log(this.productForm.value)
+   //console.log(this.productForm.value)
   }
 
   submit() {
     this.submitted = true;
-    console.log(this.productForm.value);
+    //console.log(this.productForm.value);
     if (this.productForm.valid) {
       let payload = this.productForm.value;
       let formData = new FormData();
-      console.log(payload);
-
-      return
+      //console.log(payload)
       Object.entries(payload).forEach(([key, value]) => {
         if(payload.imageurl != null){
           formData.append(key, (value).toString());
@@ -231,7 +256,7 @@ export class ProductListComponent {
 
           }, error: ((err: any) => {
             let error = this.errHandler.handleError(err);
-            //console.log(error)
+            ////console.log(error)
             if (error.status == 401) {
               this.toastrService.error('Token Expired');
             }
@@ -253,7 +278,7 @@ export class ProductListComponent {
 
           }, error: ((err: any) => {
             let error = this.errHandler.handleError(err);
-            //console.log(error)
+            ////console.log(error)
             if (error.status == 401) {
               this.toastrService.error('Token Expired');
             }
@@ -277,7 +302,7 @@ export class ProductListComponent {
         this.prodctImages = item.storageurlArr;
     }
     if (type == 'edit') {
-      console.log(item)
+      //console.log(item)
       this.modaltitle = 'Edit Product';
       this.submitBtnText = 'Update';
       this.productId = item._id;
@@ -287,6 +312,7 @@ export class ProductListComponent {
         description: item.description,
         sku: item.sku,
         category: item.category,
+        categoryId: item.categoryId,
         subCategory: item.subCategory,
         displayType: item.displayType,
         featureType : item.featureType,
@@ -311,7 +337,7 @@ export class ProductListComponent {
       }      
     },error:((err:any) =>{
       let error =  this.errHandler.handleError(err);
-      //console.log(error)
+      ////console.log(error)
       if(error.status == 401) {
        this.toastrService.error('Token Expired');
       }

@@ -51,6 +51,10 @@ export class AdminService {
      return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Admin.all,data)
    }
 
+   search(data: any){
+    return this.http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Admin.search,data)
+  }
+
 
  
 

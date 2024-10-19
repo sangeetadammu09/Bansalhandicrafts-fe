@@ -1,9 +1,6 @@
 <div class="row custom-toolbar mt-3 mb-3">
     <div class="col-12">
-        <h5>{{pagetitle | titlecase}}</h5>
-    </div>
-    <div class="col-12">
-        <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <nav aria-label="breadcrumb">
             <ol class="breadcrumb" >
               <li class="breadcrumb-item" *ngFor="let item of breadcrumbLabel"><a href="javascript:void(0)">{{item | titlecase}}</a></li>
             </ol>

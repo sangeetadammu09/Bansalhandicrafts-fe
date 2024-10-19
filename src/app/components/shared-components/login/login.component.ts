@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
     private errHandler : ErrorhandlerService,
     private _toastrService : ToastrService) { 
      this.loginForm = this._fb.group({
-        email : ['sangeeta@gmail.com', Validators.required],
-        password : ['Sangeeta@123', Validators.required]
+        email : ['', Validators.required],
+        password : ['', Validators.required]
      })
   }
 

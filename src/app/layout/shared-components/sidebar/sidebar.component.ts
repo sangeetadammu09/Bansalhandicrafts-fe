@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit {
         this.collapsed = false;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
-       console.log(this.menuList)
+      // console.log(this.menuList)
     }
 
 
