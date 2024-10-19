@@ -1,4 +1,4 @@
-# build the angular app
+# build the anguular app
 FROM node:20-alpine as build
 
 WORKDIR /app
