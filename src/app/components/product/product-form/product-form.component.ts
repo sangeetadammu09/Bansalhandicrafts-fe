@@ -27,7 +27,8 @@ export class ProductFormComponent {
   selectedFile: any[] = [];
   tuitionData :any;
   selectedFileName = "";
-  user = JSON.parse(localStorage.getItem('user'));
+  userJson =localStorage.getItem('user');
+  user:any;
   submitBtnText = 'Submit';
   imageUrl = '';
   @Input() formData: any;
@@ -53,14 +54,13 @@ export class ProductFormComponent {
 
     })
 
-    console.log(this.masterService.getData())
-    console.log('i am here')
+    //console.log(this.masterService.getData())
   }
 
  
 
   ngOnInit(): void {
-    console.log('i am here')
+    this.user = JSON.parse(this.userJson ? this.userJson : '');
 
   }
 
@@ -116,7 +116,7 @@ export class ProductFormComponent {
       let payload = this.productForm.value;
       let formData = new FormData();
       Object.entries(payload).forEach(([key, value]) => {
-          formData.append(key, (value).toString());
+          formData.append(key,(value).toString());
   
       });
       for (let i = 0; i < this.selectedFile.length; i++) {

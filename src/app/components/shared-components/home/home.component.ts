@@ -19,9 +19,9 @@ declare var $: any;
 export class HomeComponent implements OnInit {
   slides = HomeSlide;
   reviewCarousel : any[]=ParentReview;
-  products: any[];
-  responsiveOptions: any[];
-  images: any[];
+  products!: any[];
+  responsiveOptions!: any[];
+  images!: any[];
   productList: any[] = [];
   newestProductList: any[] = [];
   bestSellingProductList: any[] = [];

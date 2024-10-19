@@ -6,13 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./common-layout.component.scss']
 })
 export class CommonLayoutComponent {
-  collapedSideBar: boolean;
+  collapedSideBar!: boolean;
 
     constructor() {}
 
     ngOnInit() {}
 
-    receiveCollapsed($event) {
+    receiveCollapsed($event:any) {
         this.collapedSideBar = $event;
     }
 }

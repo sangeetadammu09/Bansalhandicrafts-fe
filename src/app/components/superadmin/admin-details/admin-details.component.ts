@@ -140,7 +140,7 @@ export class AdminDetailsComponent {
 
   
     
-    const data = socialData.map(x => {
+    const data = socialData.map((x:any) => {
       return this.fb.group({
         name: [x.name],
         url: [x.url],

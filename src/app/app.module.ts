@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './shared/utils/auth.interceptor';
@@ -18,7 +17,6 @@ import { AuthInterceptor } from './shared/utils/auth.interceptor';
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        LanguageTranslationModule,
         AppRoutingModule,FormsModule,
         ToastrModule.forRoot({
             closeButton: true,

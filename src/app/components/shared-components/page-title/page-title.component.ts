@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class PageTitleComponent {
 
-  @Input() pagetitle: string;
+  @Input() pagetitle!: string;
   @Input() breadcrumbLabel :any;
 
 }

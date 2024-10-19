@@ -265,7 +265,7 @@ export class AdminListComponent {
 
 
 
-  deleteAdmin(item){
+  deleteAdmin(item:any){
     this.adminData = item;
 
   }

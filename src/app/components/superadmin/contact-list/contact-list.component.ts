@@ -28,7 +28,7 @@ export class ContactListComponent{
   sortProperty: string = 'id';
   sortOrder = 1;
   tableColumns = ['SNo.','Reg.Date','Name', 'Email', 'Contact', 'Subject','Description', 'Delete'];
-  registerForm :FormGroup;
+  registerForm! :FormGroup;
   adminData: any;
   subAdminLabel: string = '';
   get f() { return this.registerForm.controls};
@@ -130,7 +130,7 @@ export class ContactListComponent{
   })
   }
 
-  deleteContact(item){
+  deleteContact(item:any){
     this.adminData = item;
 
   }
