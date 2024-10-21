@@ -1,31 +1,148 @@
-
-.card0 {
-    box-shadow: 0px 4px 6px 0px #757575;
-    margin: auto;
-    width: 40%;
+/* 
+.login,
+.image {
+  min-height: 75vh;
 }
 
-.loginbtn{
-    margin :auto;
-    display: block;
+.bg-image {
+  background-image: url('../../../assets/img/login-img.jpg');
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+ 
 }
 
-@media screen and (max-width: 991px) {
-    .logo {
-        margin-left: 0px
-    }
-
-    .image {
-        width: 300px;
-        height: 220px
-    }
-
-    .border-line {
-        border-right: none
-    }
-
-    .card2 {
-        border-top: 1px solid #EEEEEE !important;
-        margin: 0px 15px
-    }
+.bg-light{
+  background-color: white !important;
 }
+
+
+
+.cont{
+  font-size: large;
+}
+
+ 
+ h6:before {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #191970;
+  left: 0;
+  top: 85%;
+  position: absolute;
+}
+h6:after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #191970;
+  right: 0;
+  top: 85%;
+  position: absolute;
+}
+
+hr{
+  color: red;
+}
+
+.head{
+margin-top: 5%; 
+margin-left: 40%;
+}
+
+
+
+.small{
+  text-transform: lowercase;
+  font-size:17px;
+}
+
+.fb{
+  color: darkblue;
+}
+
+.tw{
+  color: rgb(53, 171, 210);
+}
+
+.inside{
+  background-color: none!important;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+.imgr{
+  margin-bottom: 10px;
+  height: 90%;
+  width: 100%;
+}
+
+.login-link{
+  color:#34b5b8;
+  cursor: pointer;
+  font-weight: 600;
+} */
+
+
+.demo-container {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to top, #17a2b8 0%, #c3eaf0 100%);
+  
+  }
+  
+  .btn-lg {
+    padding: 12px 26px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  ::placeholder {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+  
+  .form-control-lg {
+    font-size: 16px;
+    padding: 25px 20px;
+  }
+  
+  .font-500 {
+    font-weight: 500;
+  }
+  
+  .image-size-small {
+    width: 25px;
+    margin: 0 auto;
+  }
+  
+  .image-size-small img {
+    width: 100px;
+    margin-bottom: -70px;
+  }
+  
+  .logo {
+    position: relative;
+    
+  }

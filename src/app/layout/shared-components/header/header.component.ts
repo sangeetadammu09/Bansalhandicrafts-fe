@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-header',
@@ -13,7 +12,7 @@ export class HeaderComponent implements OnInit {
     greetingtxt = '';
     greetingicon = '';
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(public router: Router) {
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -46,9 +45,7 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/']);
     }
 
-    changeLang(language: string) {
-        this.translate.use(language);
-    }
+ 
 
     greetingMessage(){
         var today = new Date();

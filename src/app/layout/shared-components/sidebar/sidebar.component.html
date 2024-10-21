@@ -28,13 +28,13 @@
         <div class="nested-menu">
           <a class="list-group-item"[routerLink]="['/']" >           
             <span><i class="fa fa-fw fa-power-off"></i></span>
-            <span> {{ 'Log Out' | translate }}</span>
+            <span> {{ 'Log Out' }}</span>
           </a>   
         </div>
       </div>
       
     <div (click)="toggleCollapsed()" [ngClass]="{ collapsed: collapsed }" class="toggle-button">
         <i class="fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>&nbsp;
-        <span>{{ 'Collapse Sidebar' | translate }}</span>
+        <span>{{ 'Collapse Sidebar' }}</span>
     </div>
 </nav>
