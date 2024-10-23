@@ -1,23 +1,22 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ErrorhandlerService } from '../../../../app/shared/services/errorhandler.service';
-import { Pagination } from '../../../../app/shared/utils/pagination';
-import { ProductService } from '../../../shared/services/product.service';
-import { ShopSubmenu } from '../../../shared/model/shopSubmenu';
 import { FeatureList } from '../../../shared/model/featureList';
+import { ShopSubmenu } from '../../../shared/model/shopSubmenu';
+import { ErrorhandlerService } from '../../../shared/services/errorhandler.service';
 import { PagerService } from '../../../shared/services/pager.service';
+import { Pagination } from '../../../shared/utils/pagination';
+import { ExhibitionService } from '../../../shared/services/exhibition.service';
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  selector: 'app-admin-exhibition',
+  templateUrl: './admin-exhibition.component.html',
+  styleUrls: ['./admin-exhibition.component.scss']
 })
-export class ProductListComponent {
-
-  modaltitle = 'Add Product';
-  breadcrumb = ['Dashboard', 'Admin', 'Product List'];
+export class AdminExhibitionComponent {
+  modaltitle = 'Add Exbhition';
+  breadcrumb = ['Dashboard', 'Admin', 'Exhibition List'];
   startNumber = 1;
   pageSize = 10;
   productList: any[] = [];
@@ -29,7 +28,7 @@ export class ProductListComponent {
   tableSize: number[] = [10, 20, 30];
   sortProperty: string = 'id';
   sortOrder = 1;
-  tableColumns = ['SNo.', 'Date', 'Feature', 'Title', 'Description', 'Category', 'Sub Category', 'Price', 'Url', 'Image', 'Edit', 'Delete']
+  tableColumns = ['SNo.', 'Date', 'Title', 'Description', 'Category', 'Sub Category', 'Image', 'Edit', 'Delete']
   formDataInput: any;
   productForm!: FormGroup;
   submitted: boolean = false;
@@ -52,7 +51,7 @@ export class ProductListComponent {
   // convenience getter for easy access to form fields
   get p() { return this.productForm.controls; };
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,
+  constructor(private fb: FormBuilder, private exhibitionService: ExhibitionService, private router: Router,
     private errHandler: ErrorhandlerService, private toastrService: ToastrService, private filterService : PagerService) {
     this.productForm = this.fb.group({
      // _id: [''],
@@ -62,12 +61,6 @@ export class ProductListComponent {
       category: ['', Validators.required],
       categoryId : [],
       subCategory: ['', Validators.required],
-      displayType: ['', Validators.required],
-      featureTypeId : ['', Validators.required],
-      actualPrice:['', Validators.required],
-      discountPrice:['', Validators.required],
-      deliveryType : ['', Validators.required],
-      availability: ['', Validators.required],
       url: ['', Validators.required],
       isActive: [true],
       imageurl: ['']
@@ -85,7 +78,7 @@ export class ProductListComponent {
   getProducts() {
     let filterCondition:any = {};
     this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber)
-    this.productService.listOfProducts(this.filterPayload).subscribe({next: (data: any) => {
+    this.exhibitionService.listOfExhibition(this.filterPayload).subscribe({next: (data: any) => {
         if (data.status == 200) {
           let result = data.data
           //.map((item: any) => ({ ...item, modeofteaching: JSON.parse(item.modeofteaching) }))
@@ -104,7 +97,7 @@ export class ProductListComponent {
           this.toastrService.error('Please enter valid input');
         }
         if (error.status == 500) {
-          this.toastrService.error('Server Error.Failed to fetch teachers list');
+          this.toastrService.error('Server Error.Failed to fetch list');
         }
 
       })
@@ -142,7 +135,7 @@ export class ProductListComponent {
   let filterCondition:any = {};
   filterCondition.categoryId = this.filterText;
   this.filterPayload = this.filterService.GetFilterConditionPagination(filterCondition,this.pagination.pageSize, this.pagination.startNumber);
-  this.productService.search(this.filterPayload).subscribe({next: (data: any) => {
+  this.exhibitionService.search(this.filterPayload).subscribe({next: (data: any) => {
         if (data.status == 200) {
           let result = data.data
           //.map((item: any) => ({ ...item, modeofteaching: JSON.parse(item.modeofteaching) }))
@@ -161,7 +154,7 @@ export class ProductListComponent {
           this.toastrService.error('Please enter valid input');
         }
         if (error.status == 500) {
-          this.toastrService.error('Server Error.Failed to fetch teachers list');
+          this.toastrService.error('Server Error.Failed to fetch list');
         }
 
       })
@@ -169,7 +162,7 @@ export class ProductListComponent {
   }
 
   openProductModal(){
-    this.modaltitle = "Add Product";
+    this.modaltitle = "Add Exhibition";
     this.submitBtnText = 'Save';
     this.submitted = false;
     this.productForm.reset();
@@ -251,13 +244,13 @@ export class ProductListComponent {
       }
 
       if (this.productId == '0') {
-        this.productService.createProduct(formData).subscribe({
+        this.exhibitionService.createExhibition(formData).subscribe({
           next: (data: any) => {
             if (data.status == 200) {
               this.closeProductModal.nativeElement.click();
               //  $('#parentModal').modal('show')
               this.getProducts();
-              this.toastrService.success('Product saved successfully')
+              this.toastrService.success('Exhibition saved successfully')
             }
 
           }, error: ((err: any) => {
@@ -273,13 +266,13 @@ export class ProductListComponent {
           })
         })
       } else {
-        this.productService.updateProduct(this.productId, formData).subscribe({
+        this.exhibitionService.updateExhibition(this.productId, formData).subscribe({
           next: (data: any) => {
             if (data.status == 200) {
               //  $('#parentModal').modal('show')
               this.getProducts();
               this.closeProductModal.nativeElement.click();
-              this.toastrService.success('Product updated successfully')
+              this.toastrService.success('Exhibition updated successfully')
             }
 
           }, error: ((err: any) => {
@@ -304,12 +297,12 @@ export class ProductListComponent {
 
   action(item: any, type: any) {
     if (type == 'view') {
-      this.modaltitle = 'Product Images';
+      this.modaltitle = 'Exhibition Images';
         this.prodctImages = item.storageurlArr;
     }
     if (type == 'edit') {
       //console.log(item)
-      this.modaltitle = 'Edit Product';
+      this.modaltitle = 'Edit Exhibition';
       this.submitBtnText = 'Update';
       this.productId = item._id;
       this.productForm.patchValue({
@@ -320,28 +313,22 @@ export class ProductListComponent {
         category: item.category,
         categoryId: item.categoryId,
         subCategory: item.subCategory,
-        displayType: item.displayType,
-        featureTypeId : Number(item.featureTypeId),
-        actualPrice:item.actualPrice,
-        discountPrice:item.discountPrice,
-        deliveryType : item.deliveryType,
-        availability: item.availability,
         url: item.url,
         isActive: item.isActive,
         imageurl : item.imageurl
       })
     }
     if (type == 'delete') {
-      this.modaltitle = 'Delete Product';
+      this.modaltitle = 'Delete Exhibition';
       this.productId = item._id;
 
     }
   }
 
   deleteProduct(){
-    this.productService.deleteProduct(this.productId).subscribe({next: (data:any)=>{
+    this.exhibitionService.deleteExhibition(this.productId).subscribe({next: (data:any)=>{
       if(data.status == 200){
-        this.toastrService.success('Product Deleted successfully!');
+        this.toastrService.success('Exhibition Deleted successfully!');
         this.closeProductModal.nativeElement.click();
         this.getProducts();
       }      
@@ -362,4 +349,6 @@ export class ProductListComponent {
   }
 
 }
+
+
 

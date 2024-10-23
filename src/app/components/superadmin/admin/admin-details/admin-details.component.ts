@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AdminService } from '../../../shared/services/admin.service';
-import { ErrorhandlerService } from '../../../shared/services/errorhandler.service';
-import { SocialMedia } from '../../../../assets/referencedata/socialmedia';
+import { AdminService } from '../../../../shared/services/admin.service';
+import { ErrorhandlerService } from '../../../../shared/services/errorhandler.service';
+import { SocialMedia } from '../../../../../assets/referencedata/socialmedia';
 
 @Component({
   selector: 'app-admin-details',

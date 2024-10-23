@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('user', JSON.stringify(loggedUserDetails))
               // navigation to specific users
               if(loggedUserDetails.role == 'superadmin'){
-                this._router.navigate(['/dashboard/superadmin/my-profile']);
+                this._router.navigate(['/dashboard/superadmin/myprofile']);
               }
               console.log(this.menuList,'menu list loaded')
             }  

@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../../shared/services/auth.service';
-import { CommonService } from '../../../shared/services/common.service';
-import { ErrorhandlerService } from '../../../shared/services/errorhandler.service';
-import { MasterService } from '../../../shared/services/master.service';
-import { ShopSubmenu } from '../../../shared/model/shopSubmenu';
-import { ProductService } from '../../../shared/services/product.service';
+import { ShopSubmenu } from '../../../../shared/model/shopSubmenu';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { CommonService } from '../../../../shared/services/common.service';
+import { ErrorhandlerService } from '../../../../shared/services/errorhandler.service';
+import { MasterService } from '../../../../shared/services/master.service';
+import { ProductService } from '../../../../shared/services/product.service';
 
 declare var $: any;
 

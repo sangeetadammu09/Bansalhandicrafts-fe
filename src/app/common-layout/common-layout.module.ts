@@ -7,11 +7,12 @@ import { HeaderComponent } from './shared-components/header/header.component';
 import { ComponentModule } from '../components/component.module';
 import { CommonLayoutComponent } from './shared-components/layout/common-layout.component';
 import { FooterComponent } from './shared-components/footer/footer.component';
+import { CommonOverlayComponent } from './shared-components/common-overlay/common-overlay.component';
 
 
 @NgModule({
     imports: [CommonModule, CommonLayoutRoutingModule,TranslateModule,NgbDropdownModule, ComponentModule,
     ],
-    declarations: [CommonLayoutComponent, HeaderComponent, FooterComponent]
+    declarations: [CommonLayoutComponent, HeaderComponent, FooterComponent, CommonOverlayComponent]
 })
 export class CommonLayoutModule {}

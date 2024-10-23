@@ -6,32 +6,39 @@ export const AdminMenuList = {
             name: 'My Profile',
             icon : 'fa-user',
             isActive: true,
-            url: 'my-profile',
+            url: 'myprofile',
             subMenus: []
         },
         {
             id: 1,
-            name: 'Product List',
-            icon : 'fa-chalkboard',
-            isActive: true,
-            url: 'product-list',
-            subMenus: []
-        },
-        
-        {
-            id: 3,
             name: 'Admins List',
             icon : 'fa-user',
             isActive: true,
-            url: 'admin-list',
+            url: 'adminlist',
+            subMenus: []
+        },
+        {
+            id: 2,
+            name: 'Product List',
+            icon : 'fa-user',
+            isActive: true,
+            url: 'productlist',
+            subMenus: []
+        },    
+        {
+            id: 3,
+            name: 'Exhibition',
+            icon : 'fa-pencil',
+            isActive: true,
+            url: 'exhibitions',
             subMenus: []
         },
         {
             id: 4,
-            name: 'Feedback List',
+            name: 'Project',
             icon : 'fa-pencil',
             isActive: true,
-            url: 'product-feedback-list',
+            url: 'projects',
             subMenus: []
         },
         {
@@ -39,7 +46,7 @@ export const AdminMenuList = {
             name: 'Enquiry List',
             icon : 'fa-book',
             isActive: true,
-            url: 'contact-list',
+            url: 'contactlist',
             subMenus: []
         },
         // {
@@ -52,5 +59,5 @@ export const AdminMenuList = {
         // },       
 
     ],
-    message: "Admin Menu fetched successfully",
+    message: "Data fetched successfully",
 };

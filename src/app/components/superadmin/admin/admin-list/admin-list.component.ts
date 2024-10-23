@@ -2,10 +2,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ErrorhandlerService } from '../../../../app/shared/services/errorhandler.service';
-import { AdminService } from '../../../../app/shared/services/admin.service';
-import { PagerService } from '../../../../app/shared/services/pager.service';
-import { Pagination } from '../../../shared/utils/pagination';
+import { ErrorhandlerService } from '../../../../../app/shared/services/errorhandler.service';
+import { AdminService } from '../../../../../app/shared/services/admin.service';
+import { PagerService } from '../../../../../app/shared/services/pager.service';
+import { Pagination } from '../../../../shared/utils/pagination';
 
 
 @Component({

@@ -22,15 +22,15 @@ export class ProductService {
   }
 
   productById(_id:string, pagination:any){
-    return this._http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.productbyid+_id,pagination)
+    return this._http.post<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.id+_id,pagination)
   }
 
   updateProduct(_id:string,parent: any){
-    return this._http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.productupdate+_id, parent)
+    return this._http.put<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.update+_id, parent)
   }
   
   deleteProduct(_id:string){
-    return this._http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.productdelete+_id)
+    return this._http.delete<any>(APP_DI_CONFIG.parentDomain+APP_DI_CONFIG.endPoints.Product.delete+_id)
   }
 
   // feedback

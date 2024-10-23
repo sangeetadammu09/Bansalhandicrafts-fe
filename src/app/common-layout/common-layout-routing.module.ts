@@ -7,6 +7,8 @@ import { LoginComponent } from '../components/shared-components/login/login.comp
 import { RegisterComponent } from '../components/shared-components/register/register.component';
 import { CommonLayoutComponent } from './shared-components/layout/common-layout.component';
 import { ShopComponent } from '../components/shared-components/shop/shop.component';
+import { ExhibitionComponent } from '../components/shared-components/exhibition/exhibition.component';
+import { ProjectsComponent } from '../components/shared-components/projects/projects.component';
 
 const routes: Routes = [
      {
@@ -20,6 +22,8 @@ const routes: Routes = [
             { path: 'product/:id', component : ShopComponent},
             { path: 'login', component: LoginComponent},
             { path: 'register', component: RegisterComponent},
+            { path: 'exhibition', component: ExhibitionComponent},
+            { path: 'project', component: ProjectsComponent},
            
             
         ]

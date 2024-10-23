@@ -35,13 +35,17 @@
         <tr>
           <td>{{itemsPerPage*(currentPage-1)+i+1}} </td>
           <td>{{item.createdAt | date:'dd/MM/yyyy'}}</td>
-          <td>{{item.featureType}}</td>
+          <td>{{item.featureTypeId == 0 ? 'Best Selling Product' : item.featureTypeId == 1 ? 'Newest Product' : 'Featured Product' }}</td>
           <td>{{item.title}}</td>
-          <td>{{item.description}}</td>
+          <td>
+            <span  data-bs-toggle="tooltip" data-bs-placement="top" [title]="item.description">{{ item.description |  slice: 0 : 30 }} ...</span>
+          </td>
           <td>{{item.category}}</td>
           <td>{{item.subCategory}}</td>
-          <td>{{item.price}}</td>
-          <td>{{item.url}}</td>
+          <td>{{item.actualPrice}}</td>
+          <td>{{item.discountPrice}}</td>
+          <td>{{item.availability == "1" ? 'Yes' : 'No' }}</td>
+          <td>{{item.url}}</td>  
           <td (click)="action(item,'view')" data-bs-toggle="modal" data-bs-target="#ProductModal">
             <img src="../../../../assets/images/icons/photo_icon.png" alt="View Product Image">
           </td>
@@ -79,7 +83,6 @@
     <app-not-found></app-not-found>
   </div>
 </div>
-
 
 <div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" data-bs-keyboard="false" data-bs-backdrop="static">
   <div class="modal-dialog modal-lg" role="document">

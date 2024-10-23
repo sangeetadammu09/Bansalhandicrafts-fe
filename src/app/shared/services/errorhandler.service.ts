@@ -9,7 +9,7 @@ export class ErrorhandlerService {
   constructor(private http : HttpClient) { }
 
   handleError(error: HttpErrorResponse){
-    console.log(error)
+   // console.log(error)
     return {'status': error.status,'message' : error.error.err};
   }
 }

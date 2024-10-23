@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 export const APP_DI_CONFIG: any = {
   // For api calls -
-  parentDomain: 'https://bansalhandicraftbe-a5hjfxghe8arbaaq.eastasia-01.azurewebsites.net/',
-  //parentDomain: 'http://localhost:8080/',
+  //parentDomain: 'https://bansalhandicraftbe-a5hjfxghe8arbaaq.eastasia-01.azurewebsites.net/',
+  parentDomain: 'http://localhost:8080/',
   endPoints: {
     Admin:{
       login : "admin/login",
@@ -32,11 +32,26 @@ export const APP_DI_CONFIG: any = {
     Product:{
       form : "product/form",
       list : "product/list",
-      productbyid : "product/listofid/",
+      id : "product/listofid/",
       search : "product/search",
-      checkphoneemail : "product/check/",
-      productupdate : "product/update/",
-      productdelete : "product/delete/"
+      update : "product/update/",
+      delete : "product/delete/"
+    },
+    Exhibition:{
+      form : "exhibition/form",
+      list : "exhibition/list",
+      id : "exhibition/listofid/",
+      search : "exhibition/search",
+      update : "exhibition/update/",
+      delete : "exhibition/delete/"
+    },
+    Project:{
+      form : "project/form",
+      list : "project/list",
+      projectbyid : "project/listofid/",
+      search : "project/search",
+      update : "project/update/",
+      delete : "project/delete/"
     },   
     Mail:{
         contact : "mail/contact",

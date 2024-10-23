@@ -7,13 +7,10 @@
     <div class="row" *ngIf="productList.length > 0">
       <div class="col-lg-3 col-sm-6 col-md-4 mt-2 mb-2"
         *ngFor="let item of productList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage, totalItems: totalItems }; let i = index">
-        <div class="card p-3 h-100">
-          <div  class="px-2 mx-2">
-            <img [src]="item.storageurlArr[0].imageurl" width="100%">
-            
+        <div class="card mt-3 h-100">
+          <div class="row p-1">
+            <img [src]="item.storageurlArr[0].imageurl" width="100%">          
           </div>      
-         
-  
           <div class="row p-2">
             <div class="col-12">{{item.title}}</div>
             <div class="col-12"> <b> {{item.price | currency: 'INR' }}</b></div>
