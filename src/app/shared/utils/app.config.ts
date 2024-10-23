@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 export const APP_DI_CONFIG: any = {
   // For api calls -
-  //parentDomain: 'https://bansalhandicraftbe-a5hjfxghe8arbaaq.eastasia-01.azurewebsites.net/',
-  parentDomain: 'http://localhost:8080/',
+  parentDomain: 'https://bansalhandicraftbe-a5hjfxghe8arbaaq.eastasia-01.azurewebsites.net/',
+  //parentDomain: 'http://localhost:8080/',
   endPoints: {
     Admin:{
       login : "admin/login",
