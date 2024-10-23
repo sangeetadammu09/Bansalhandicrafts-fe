@@ -17,7 +17,7 @@ export class AdminDetailsComponent {
   isEdited = false;
   user = JSON.parse(localStorage.getItem('user'));
   adminForm: FormGroup;
-  adminData: any;
+  adminData: any= {};
   get f(){ return this.adminForm.controls};
   submitted: boolean = false;
   selectedFile:any;
@@ -27,6 +27,7 @@ export class AdminDetailsComponent {
   instagramUrl = '';
   twitterUrl = '';
   linkedinUrl = '';
+  profileImageUrl = '';
 
   constructor(private fb: FormBuilder, private adminService: AdminService, private router: Router,
     private errHandler : ErrorhandlerService,private _toastrService : ToastrService) {
@@ -87,18 +88,19 @@ export class AdminDetailsComponent {
         location: this.adminData.location== 'empty' ? '': this.adminData.location,
         role: this.adminData.role,
         password: this.adminData.password,
-        cpass: this.adminData.cpass,
-      //  imageurl: this.adminData.storageurlArr[0].imageurl,
+        cpass: this.adminData.cpass,  
         isActive: this.adminData.isActive
       
       })
+
+      this.profileImageUrl = this.adminData.storageurlArr.length>0 ? this.adminData.storageurlArr[0].imageurl : '../../../../assets/images/noimageavailable.png';
 
     
       if(this.adminData.sociallinks != 'empty'){
        this.populateData();
       }
 
-      this.selectedFileName = this.adminData.storageurlArr.length>0 ? '' : this.adminData.storageurlArr[0].imageurl.substring(this.adminData.storageurlArr[0].imageurl.indexOf('uploads/') + 1);
+      //this.selectedFileName = this.adminData.storageurlArr.length>0 ? '' : this.adminData.storageurlArr[0].imageurl.substring(this.adminData.storageurlArr[0].imageurl.indexOf('uploads/') + 1);
       
       }      
     },error:((err:any) =>{
@@ -118,8 +120,10 @@ export class AdminDetailsComponent {
 
   populateData(){
     // populating data
+    if(this.adminData.sociallinks){
+
     const socialData = JSON.parse(this.adminData.sociallinks);
-    console.log(socialData)
+   // console.log(socialData)
   
     socialData.forEach((x:any)=>{
       if(x.name == 'facebook'){
@@ -150,6 +154,7 @@ export class AdminDetailsComponent {
     const sformArray: FormArray = this.fb.array(data);
     this.adminForm.setControl('socialLinks', sformArray);
   
+  }
   }
 
 

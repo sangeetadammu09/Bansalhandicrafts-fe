@@ -81,7 +81,7 @@
 </div>
 
 
-<div class="modal fade" id="ProductModal" tabindex="-1" role="dialog">
+<div class="modal fade" id="ProductModal" tabindex="-1" role="dialog" data-bs-keyboard="false" data-bs-backdrop="static">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -155,41 +155,69 @@
           </div>
 
           <div class="col-md-6 mb-3">
-            <label for="location">Price<span style="color:red;">*</span></label>
-            <input type="text" class="form-control" formControlName="price" [ngClass]="{'is-invalid':
-        (submitted && p['price'].errors) ||(p['price'].errors && p['price'].touched)}" />
-            <div *ngIf="(submitted && p['price'].errors) ||(p['price'].errors && p['price'].touched)"
+            <label for="location">Actual Price<span style="color:red;">*</span></label>
+            <input type="text" class="form-control" formControlName="actualPrice" [ngClass]="{'is-invalid':
+            (submitted && p['actualPrice'].errors) ||(p['actualPrice'].errors && p['actualPrice'].touched)}" />
+            <div *ngIf="(submitted && p['actualPrice'].errors) ||(p['actualPrice'].errors && p['actualPrice'].touched)"
               class="invalid-feedback">
-              <div *ngIf="p['price'].errors['required']">Price is required</div>
+              <div *ngIf="p['actualPrice'].errors['required']">Price is required</div>
             </div>
           </div>
 
           <div class="col-md-6 mb-3">
-            <label for="location">Url<span style="color:red;">*</span></label>
+            <label for="location">Discount Price<span style="color:red;">*</span></label>
+            <input type="text" class="form-control" formControlName="discountPrice" [ngClass]="{'is-invalid':
+            (submitted && p['discountPrice'].errors) ||(p['discountPrice'].errors && p['discountPrice'].touched)}" />
+            <div *ngIf="(submitted && p['discountPrice'].errors) ||(p['discountPrice'].errors && p['discountPrice'].touched)"
+              class="invalid-feedback">
+              <div *ngIf="p['discountPrice'].errors['required']">Discount Price is required</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="location">Delivery Type<span style="color:red;">*</span></label>
+            <input type="text" class="form-control" formControlName="deliveryType" [ngClass]="{'is-invalid':
+            (submitted && p['deliveryType'].errors) ||(p['deliveryType'].errors && p['deliveryType'].touched)}" />
+            <div *ngIf="(submitted && p['deliveryType'].errors) ||(p['deliveryType'].errors && p['deliveryType'].touched)"
+              class="invalid-feedback">
+              <div *ngIf="p['deliveryType'].errors['required']">Delivery Type is required</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="location">Is Available<span style="color:red;">*</span></label>
+            <select class="form-control form-select" id="exampleFormControlSelect1" formControlName="availability"
+              [ngClass]="{'is-invalid':(submitted && p['availability'].errors) ||(p['availability'].errors && p['availability'].touched)}">
+              <option value="" selected disabled>Select</option>
+              <option value="1">Yes</option>
+              <option value="2">No</option>
+            </select>
+            <div *ngIf="(submitted && p['availability'].errors) ||(p['availability'].errors && p['availability'].touched)"
+              class="invalid-feedback">
+              <div *ngIf="p['availability'].errors['required']">Display Type is required</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="location">Product link<span style="color:red;">*</span></label>
             <input type="text" class="form-control" formControlName="url" [ngClass]="{'is-invalid':
         (submitted && p['url'].errors) ||(p['url'].errors && p['url'].touched)}" />
             <div *ngIf="(submitted && p['url'].errors) ||(p['url'].errors && p['url'].touched)"
               class="invalid-feedback">
-              <div *ngIf="p['url'].errors['required']">Url is required</div>
+              <div *ngIf="p['url'].errors['required']">Product link is required</div>
             </div>
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="location">Feature Type<span style="color:red;">*</span></label>
-            <select class="form-control form-select" id="exampleFormControlSelect1" formControlName="featureType"
-              [ngClass]="{'is-invalid':(submitted && p['featureType'].errors) ||(p['featureType'].errors && p['featureType'].touched)}">
+            <select class="form-control form-select" id="exampleFormControlSelect1" formControlName="featureTypeId"
+              [ngClass]="{'is-invalid':(submitted && p['featureTypeId'].errors) ||(p['featureTypeId'].errors && p['featureTypeId'].touched)}">
               <option *ngFor="let item of featureList" [value]="item.id">{{item.label}}</option>
             </select>
-            <div *ngIf="(submitted && p['featureType'].errors) ||(p['featureType'].errors && p['featureType'].touched)"
+            <div *ngIf="(submitted && p['featureTypeId'].errors) ||(p['featureTypeId'].errors && p['featureTypeId'].touched)"
               class="invalid-feedback">
-              <div *ngIf="p['featureType'].errors['required']">Feature Type is required</div>
+              <div *ngIf="p['featureTypeId'].errors['required']">Feature Type is required</div>
             </div>
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label for="location">Description</label>
-            <textarea type="text-area" class="form-control" rows="5" id="description" formControlName="description">
-        </textarea>
           </div>
 
           <div class="col-md-6 mb-3">
@@ -197,6 +225,14 @@
             <input class="form-control" type="file" id="formFile" formControlName="imageurl"
               (change)="onFileSelect($event)" name="document" multiple>
           </div>
+
+          <div class="col-md-12 mb-3">
+            <label for="location">Description</label>
+            <textarea type="text-area" class="form-control" rows="5" id="description" formControlName="description">
+        </textarea>
+          </div>
+
+          
           <!-- <div class="col-md-6 mb-3" *ngIf="imageUrl != ''">
         <label for="upload">Reupload Reference</label>
         <div class="col-lg-12 mb-3">

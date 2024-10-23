@@ -29,7 +29,7 @@ export class ProductListComponent {
   tableSize: number[] = [10, 20, 30];
   sortProperty: string = 'id';
   sortOrder = 1;
-  tableColumns = ['SNo.', 'Date', 'Feature', 'Ttile', 'Description', 'Category', 'Sub Category', 'Price', 'Url', 'Image', 'Edit', 'Delete']
+  tableColumns = ['SNo.', 'Date', 'Feature', 'Title', 'Description', 'Category', 'Sub Category', 'Price', 'Url', 'Image', 'Edit', 'Delete']
   formDataInput: any;
   productForm!: FormGroup;
   submitted: boolean = false;
@@ -63,8 +63,11 @@ export class ProductListComponent {
       categoryId : [],
       subCategory: ['', Validators.required],
       displayType: ['', Validators.required],
-      featureType : ['', Validators.required],
-      price: ['', Validators.required],
+      featureTypeId : ['', Validators.required],
+      actualPrice:['', Validators.required],
+      discountPrice:['', Validators.required],
+      deliveryType : ['', Validators.required],
+      availability: ['', Validators.required],
       url: ['', Validators.required],
       isActive: [true],
       imageurl: ['']
@@ -172,7 +175,8 @@ export class ProductListComponent {
     this.productForm.reset();
     this.productForm.markAsUntouched();
     this.productForm.markAsPristine();
-    this.productForm.patchValue({isActive: true});
+    this.productForm.patchValue({isActive: true, subCategory: '-', url: '-',
+       availability:1, deliveryType : 'free delivery'});
     this.productId = '0';
 
   }
@@ -234,10 +238,12 @@ export class ProductListComponent {
     if (this.productForm.valid) {
       let payload = this.productForm.value;
       let formData = new FormData();
-      //console.log(payload)
-      Object.entries(payload).forEach(([key, value]) => {
+     // console.log(payload)
+      Object.entries(payload).forEach(([key, value]) => { 
         if(payload.imageurl != null){
           formData.append(key, (value).toString());
+        }else{
+          this.toastrService.error('Please upload images')
         }
       });
       for (let i = 0; i < this.selectedFile.length; i++) {
@@ -315,10 +321,14 @@ export class ProductListComponent {
         categoryId: item.categoryId,
         subCategory: item.subCategory,
         displayType: item.displayType,
-        featureType : item.featureType,
-        price: item.price,
+        featureTypeId : Number(item.featureTypeId),
+        actualPrice:item.actualPrice,
+        discountPrice:item.discountPrice,
+        deliveryType : item.deliveryType,
+        availability: item.availability,
         url: item.url,
-        isActive: item.isActive
+        isActive: item.isActive,
+        imageurl : item.imageurl
       })
     }
     if (type == 'delete') {
