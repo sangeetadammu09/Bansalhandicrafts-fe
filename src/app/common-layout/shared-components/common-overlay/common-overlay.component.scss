@@ -3,16 +3,36 @@
     width: 60px;
     height: 60px;
     bottom: 40px;
-    background-color: #026d29;
-    color: #FFF;
     border-radius: 50px;
     text-align: center;
     font-size: 30px;
-    box-shadow: 2px 2px 3px #999;
     z-index: 100;
     right: 15px;
 }
 
 .my-float {
     margin-top: 16px;
+}
+
+.fixed-plugin {
+    position: fixed;
+    right: 0;
+    width: 80px;
+    background:white;
+    z-index: 1031;
+    border-radius: 8px 0 0 8px;
+    text-align: center;
+    top: 120px;
+}
+
+.fixed-plugin-eshoppee{
+    position: fixed;
+    right: 0;
+    width: 300px;
+    background:white;
+    z-index: 1031;
+    border-radius: 8px 0 0 8px;
+    text-align: center;
+    top: 100px;
+    color: black;
 }

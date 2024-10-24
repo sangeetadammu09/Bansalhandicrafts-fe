@@ -1,5 +1,42 @@
 <a class="whatsapp" target="_blank" 
 href="https://api.whatsapp.com/send?phone=+919810190287&text='I have a query'">
-    <i class="fa fa-whatsapp my-float"></i>
+   <img src="../../../../assets/images/icons/whatsapp_icon.png" alt="whatsapp">
 </a> 
 
+<div class="fixed-plugin p-2" *ngIf="!ShowEshoppeeWindow" style="cursor: pointer;">
+      <div (click)="showEshoppeeWindow = true">Visit Eshoppee</div>
+</div>
+
+<div  class="fixed-plugin-eshoppee p-2" *ngIf="showEshoppeeWindow">
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-lg-9"><h5>About Eshoppee</h5></div>
+            <div class="col-lg-3 float-end">
+                <button type="button" class="btn-close" aria-label="Close" (click)="showEshoppeeWindow = false"></button></div>
+        </div>
+        
+        <img src="../../../../assets/images/white-beads-banner.png" alt="About Eshoppee" width="100%" height="auto">
+        <p style="text-align:left" class="p-2">We are pleased to introduce our self as an manufacturer, whole seller and exporter of  
+            “GLASS BEADS, STONES, VASTU FENG SHUI PRODUCTS, FASHION ACCESSORIES, AGATE STONE TABLE TOPS”  since 2001 
+            under the brand name “ESHOPPEE” name of our company BANSAL HANDICRAFTS.
+        </p>
+        <p>
+            <a  href="https://eshoppee.co/" target="_blank">Visit Website</a>
+        </p>
+      </div>
+    
+    <!-- <div class="fade">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">About Eshoppee</h5>
+              
+            </div>
+            <div class="modal-body">
+               
+            </div>
+            <div class="modal-footer">
+                <a  href="https://eshoppee.co/" target="_blank">Visit Website</a>
+            </div>
+          </div>
+      </div> -->
+</div>

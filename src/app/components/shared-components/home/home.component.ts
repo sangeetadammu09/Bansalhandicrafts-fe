@@ -94,13 +94,14 @@ export class HomeComponent implements OnInit {
     this.productService.listOfProducts(null).subscribe({
       next: (data: any) => {
         if (data.status == 200) {
-          let result = data.data
-          //.map((item: any) => ({ ...item, modeofteaching: JSON.parse(item.modeofteaching) }))
+          let result = data.data;
           this.productList = result;
-          //console.log(result)
-          this.bestSellingProductList = result.filter((item: any) => item.featureType == "0");
-          this.newestProductList = result.filter((item: any) => item.featureType == "1");
-          this.featuredProductList = result.filter((item: any) => item.featureType == "2");
+          
+          this.bestSellingProductList = result.filter((item: any) => item.featureTypeId == "0");
+          this.newestProductList = result.filter((item: any) => item.featureTypeId == "1");
+          this.featuredProductList = result.filter((item: any) => item.featureTypeId == "2");
+
+          console.log(this.bestSellingProductList)
        
         
         }
@@ -115,7 +116,7 @@ export class HomeComponent implements OnInit {
           this.toastrService.error('Please enter valid input');
         }
         if (error.status == 500) {
-          this.toastrService.error('Server Error.Failed to fetch teachers list');
+          this.toastrService.error('Server Error.Failed to fetch list');
         }
 
       })
