@@ -239,7 +239,6 @@ export class ProductListComponent {
     if (this.productForm.valid) {
       let payload = this.productForm.value;
       let formData = new FormData();
-      return
       Object.entries(payload).forEach(([key, value]) => { 
         if(payload.imageurl != null){
           formData.append(key, (value).toString());

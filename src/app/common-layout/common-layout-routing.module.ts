@@ -15,8 +15,8 @@ const routes: Routes = [
          path: '',
          component: CommonLayoutComponent,
         children: [
-            { path: '', redirectTo: 'home', pathMatch: 'prefix' },
-            {path: 'home', component: HomeComponent},
+            { path: '', redirectTo: '', pathMatch: 'prefix' },
+            {path: '', component: HomeComponent},
             {path: 'about', component: AboutComponent},
             {path: 'contact', component: ContactComponent},
             { path: 'product/:id', component : ShopComponent},
